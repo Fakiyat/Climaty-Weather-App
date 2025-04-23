@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./WeatherApp.css";
 import Sunny from "../assets/Images/Sunny-weather.png";
 import Snowy from "../assets/Images/Snowfalling.png";
 import Rainy from "../assets/Images/Raining.png";
-import Cloudy from "../assets/Images/cloudy.png";
+import Cloudy from "../assets/Images/Cloudyy.png";
 // import Sunny from "./../assets/Images/sunny.png";
 
 function WeatherApp() {
@@ -31,6 +31,23 @@ function WeatherApp() {
   const monthName = monthNames[monthNumber];
   const formatedDate = `${monthName} / ${date} / ${year}`;
 
+  // for default loaction when the app loads
+  useEffect(() => {
+    const fetchDefaultWeather = async () => {
+      const defaultLoaction = "Srinagar";
+      try {
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${defaultLoaction}&units=Metric&appid=${api_key}`
+        );
+        const defaultData = await response.json();
+        setData(defaultData);
+      } catch (error) {
+        console.erroe("Error fetching defalut location", error);
+      }
+    };
+    fetchDefaultWeather();
+  }, []);
+
   const handleSearchInput = (e) => {
     setLoaction(e.target.value);
 
@@ -45,15 +62,17 @@ function WeatherApp() {
   //   setData(searchData);
   // };
   async function weatherData2() {
-    try {
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${loaction}&units=Metric&appid=${api_key}`
-      );
-      const searchData = await response.json();
-      console.log(searchData);
-      setData(searchData);
-    } catch (error) {
-      console.error("Error fetching data from api", error);
+    if (loaction.trim() !== "") {
+      try {
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${loaction}&units=Metric&appid=${api_key}`
+        );
+        const searchData = await response.json();
+        console.log(searchData);
+        setData(searchData);
+      } catch (error) {
+        console.error("Error fetching data from api", error);
+      }
     }
   }
   const handleKeyDown = (e) => {
@@ -61,6 +80,17 @@ function WeatherApp() {
       weatherData2();
     }
   };
+  const weatherImages = {
+    Clear: Sunny,
+    Snow: Snowy,
+    Rain: Rainy,
+    Clouds: Cloudy,
+    Haze: Cloudy,
+    Mist: Cloudy,
+  };
+  const weatherImage = data.weather
+    ? weatherImages[data.weather[0].main]
+    : null;
   return (
     <div className="container">
       <div className="weather-app">
@@ -89,7 +119,7 @@ function WeatherApp() {
         </div>
 
         <div className="climate">
-          <img src={Sunny} alt="sunny" />
+          <img src={weatherImage} alt="sunny" />
           <div className="weather-type">
             {data.weather ? data.weather[0].main : null}
           </div>
