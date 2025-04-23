@@ -10,6 +10,26 @@ function WeatherApp() {
   const [data, setData] = useState({});
   const [loaction, setLoaction] = useState("");
   const api_key = "91d1cb936f8682bef4adc123701c79bf";
+  const date = new Date().getDate();
+  const monthNumber = new Date().getMonth(); // Months are zero based
+  const year = new Date().getFullYear();
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const monthName = monthNames[monthNumber];
+  const formatedDate = `${monthName} / ${date} / ${year}`;
 
   const handleSearchInput = (e) => {
     setLoaction(e.target.value);
@@ -76,8 +96,16 @@ function WeatherApp() {
           <div className="temp">
             {data.main ? `${Math.floor(data.main.temp)}°` : null}
           </div>
+          <div style={{ color: "white", marginBottom: "10px" }}>
+            {data.main ? (
+              <span>
+                H: {Math.floor(data.main.temp_max)}° / L:{" "}
+                {Math.floor(data.main.temp_min)}°
+              </span>
+            ) : null}
+          </div>
           <div className="weather-date">
-            <p>Wed, 23 April</p>
+            <p>{formatedDate}</p>
           </div>
         </div>
 
@@ -85,17 +113,23 @@ function WeatherApp() {
           <div className="info-item">
             <i className="fa-solid fa-temperature-high info-icon"></i>
             <div className="info-title">Feels Like</div>
-            <div className="info-value">23</div>
+            <div className="info-value">
+              {data.main ? `${Math.floor(data.main.feels_like)}°` : null}
+            </div>
           </div>
           <div className="info-item">
             <i className="fa-solid fa-compress info-icon"></i>
             <div className="info-title">Pressure</div>
-            <div className="info-value">1000</div>
+            <div className="info-value">
+              {data.main ? data.main.pressure : null} hPa
+            </div>
           </div>
           <div className="info-item">
-            <i className="fa-solid fa-sun info-icon"></i>
-            <div className="info-title">UV Index</div>
-            <div className="info-value">8</div>
+            <i className="fa-solid fa-water info-icon"></i>
+            <div className="info-title">Sea Level</div>
+            <div className="info-value">
+              {data.main ? data.main.sea_level : null} mSl
+            </div>
           </div>
         </div>
 
@@ -103,12 +137,14 @@ function WeatherApp() {
           <div className="humidity">
             <div className="data-name">Humidity</div>
             <i className="fa-solid fa-droplet"></i>
-            <div className="data">35%</div>
+            <div className="data">{data.main ? data.main.humidity : null}%</div>
           </div>
           <div className="wind">
             <div className="data-name">Wind</div>
             <i className="fa-solid fa-wind"></i>
-            <div className="data">3 km/h</div>
+            <div className="data">
+              {data.wind ? `${Math.floor(data.wind.speed)} kph` : null}
+            </div>
           </div>
         </div>
 
