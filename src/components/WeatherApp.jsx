@@ -91,8 +91,19 @@ function WeatherApp() {
   const weatherImage = data.weather
     ? weatherImages[data.weather[0].main]
     : null;
+  const backgroundImages = {
+    Clear: `linear-gradient(135deg,rgb(211, 111, 30),rgb(231, 169, 53))`,
+    Snow: `linear-gradient(135deg, #2c3e50,rgb(161, 202, 209))`,
+    Rain: `linear-gradient(135deg,rgb(112, 133, 155),rgb(75, 83, 85)`,
+    Clouds: `linear-gradient(135deg,rgb(57, 92, 133),rgb(69, 87, 114)`,
+    Haze: `linear-gradient(135deg,rgb(81, 127, 173), #93ccd6)`,
+    Mist: `linear-gradient(135deg, #2c3e50, #93ccd6)`,
+  };
+  const backgroundImage = data.weather
+    ? backgroundImages[data.weather[0].main]
+    : null;
   return (
-    <div className="container">
+    <div className="container" style={{ backgroundImage }}>
       <div className="weather-app">
         <button className="theme-toggle">
           <i className="fa-solid fa-moon"></i>
@@ -179,30 +190,25 @@ function WeatherApp() {
         </div>
 
         <div className="forecast">
-          <div className="forecast-title">5-Day Forecast</div>
+          <div className="forecast-title">Day Forecast</div>
           <div className="forecast-items">
             <div className="forecast-item">
-              <div className="forecast-day">Thu</div>
               <i className="fa-solid fa-sun forecast-icon"></i>
               <div className="forecast-temp">29°C</div>
             </div>
             <div className="forecast-item">
-              <div className="forecast-day">Fri</div>
               <i className="fa-solid fa-cloud-sun forecast-icon"></i>
               <div className="forecast-temp">27°C</div>
             </div>
             <div className="forecast-item">
-              <div className="forecast-day">Sat</div>
               <i className="fa-solid fa-cloud forecast-icon"></i>
               <div className="forecast-temp">25°C</div>
             </div>
             <div className="forecast-item">
-              <div className="forecast-day">Sun</div>
               <i className="fa-solid fa-cloud-sun-rain forecast-icon"></i>
               <div className="forecast-temp">24°C</div>
             </div>
             <div className="forecast-item">
-              <div className="forecast-day">Mon</div>
               <i className="fa-solid fa-sun forecast-icon"></i>
               <div className="forecast-temp">26°C</div>
             </div>

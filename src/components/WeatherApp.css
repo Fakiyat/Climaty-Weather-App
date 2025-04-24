@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600&display=swap");
 
 :root {
-  --primary-gradient: linear-gradient(135deg, #2c3e50, #adb9bb);
+  --primary-gradient: linear-gradient(135deg, #2c3e50, #93ccd6);
   --glass-bg: rgba(255, 255, 255, 0.1);
   --glass-bg-darker: rgba(255, 255, 255, 0.1);
   --glass-bg-hover: rgba(255, 194, 194, 0.2);
@@ -22,7 +22,7 @@
   font-family: "Poppins", sans-serif;
 }
 
-body {
+/* body {
   background: var(--primary-gradient);
   min-height: 100vh;
   display: flex;
@@ -30,9 +30,9 @@ body {
   align-items: center;
   padding: 20px;
   transition: background 0.5s ease;
-}
+} */
 
-body::before {
+/* body::before {
   content: "";
   position: fixed;
   top: 0;
@@ -44,12 +44,10 @@ body::before {
   background-position: center;
   opacity: 0.65;
   z-index: -1;
-}
+} */
 
 .container {
   width: 100%;
-  max-width: 800px;
-
   display: flex;
   justify-content: center;
 }
@@ -68,7 +66,7 @@ body::before {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.weather-app::before {
+/* .weather-app::before {
   content: "";
   position: absolute;
   width: 200px;
@@ -81,7 +79,7 @@ body::before {
   top: -100px;
   right: -100px;
   border-radius: 50%;
-}
+} */
 
 .search {
   margin-bottom: 35px;
@@ -180,17 +178,17 @@ body::before {
   bottom: -20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 80px;
+  width: 100px;
   height: 2px;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 2px;
 }
 
 .climate img {
-  width: 350px;
-  margin-top: -7rem;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.25));
-  animation: float 6s ease-in-out infinite;
+  width: 290px;
+  margin-top: -50px;
+
+  height: auto;
 }
 
 @keyframes float {
@@ -209,7 +207,7 @@ body::before {
   margin-bottom: 8px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  background: linear-gradient(to right, #ffffff, #dff6ff);
+  background: linear-gradient(to right, #ffffff, #31c5ff);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -438,11 +436,6 @@ body::before {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   transform: translateY(-3px);
-}
-
-.forecast-day {
-  font-size: 14px;
-  margin-bottom: 5px;
 }
 
 .forecast-icon {
