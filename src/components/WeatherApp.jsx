@@ -9,10 +9,14 @@ import Cloudy from "../assets/Images/Cloudyy.png";
 function WeatherApp() {
   const [data, setData] = useState({});
   const [loaction, setLoaction] = useState("");
+
   const api_key = "91d1cb936f8682bef4adc123701c79bf";
-  const date = new Date().getDate();
+
+  const date = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const currentDate = new Date().getDate();
+  const dateName = date[currentDate % 7];
   const monthNumber = new Date().getMonth(); // Months are zero based
-  const year = new Date().getFullYear();
+
   const monthNames = [
     "January",
     "February",
@@ -29,7 +33,7 @@ function WeatherApp() {
   ];
 
   const monthName = monthNames[monthNumber];
-  const formatedDate = `${monthName} / ${date} / ${year}`;
+  const formatedDate = `${dateName} , ${currentDate} ${monthName} `;
 
   // for default loaction when the app loads
   useEffect(() => {
@@ -92,7 +96,7 @@ function WeatherApp() {
     ? weatherImages[data.weather[0].main]
     : null;
   const backgroundImages = {
-    Clear: `linear-gradient(135deg,rgb(211, 111, 30),rgb(231, 169, 53))`,
+    Clear: `linear-gradient(135deg,rgb(224, 142, 75),rgb(223, 174, 83))`,
     Snow: `linear-gradient(135deg, #2c3e50,rgb(161, 202, 209))`,
     Rain: `linear-gradient(135deg,rgb(112, 133, 155),rgb(75, 83, 85)`,
     Clouds: `linear-gradient(135deg,rgb(57, 92, 133),rgb(69, 87, 114)`,
@@ -134,6 +138,9 @@ function WeatherApp() {
           <div className="weather-type">
             {data.weather ? data.weather[0].main : null}
           </div>
+          <span className="weather-description">
+            {data.weather ? data.weather[0].description : null}
+          </span>
           <div className="temp">
             {data.main ? `${Math.floor(data.main.temp)}°` : null}
           </div>
