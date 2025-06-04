@@ -11,3 +11,4 @@ Currently, two official plugins are available:
 
 
 
+![Screenshot 2025-06-04 234945](https://github.com/user-attachments/assets/02595244-aa55-4617-9f53-e3cabe7230d7)
